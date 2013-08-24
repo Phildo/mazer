@@ -2,8 +2,8 @@ OUT = mazer
 OBJS = main.o
 CC = g++
 DEBUG = #-g
-CFLAGS = -Wall -c $(DEBUG)
-LFLAGS = -Wall `sdl-config --libs` $(DEBUG)
+CFLAGS = -Wall -c `sdl-config --cflags` $(DEBUG)
+LFLAGS = -Wall `sdl-config --libs` -lSDL_image $(DEBUG)
 
 $(OUT) : $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o $(OUT)
