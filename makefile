@@ -14,7 +14,7 @@ main.o : main.cpp
 clean :
 	\rm -f *.o *.out $(OUT) $(OUT).tar.gz
 
-tar :
+tar : $(OUT)
 	tar -czvf $(OUT).tar.gz $(OUT) assets
 
 pull :
