@@ -12,7 +12,7 @@ main.o : main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
 clean :
-	\rm -f *.o *.out $(OUT) $(OUT).tar.gz
+	\rm -f *.o *.out $(OUT)
 
 tar : $(OUT)
 	tar -czvf $(OUT).tar.gz $(OUT) assets
