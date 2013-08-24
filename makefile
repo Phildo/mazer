@@ -17,5 +17,8 @@ clean :
 tar : $(OUT)
 	tar -czvf $(OUT).tar.gz $(OUT) assets
 
+untar : $(OUT).tar.gz
+	tar -xzvf $(OUT).tar.gz
+
 pull :
 	scp phildo@phildogames.com:/var/www/html/games/ogam/mazer/$(OUT).tar.gz .
