@@ -12,7 +12,10 @@ main.o : main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
 clean :
-	\rm -f *.o *.out $(OUT)
+	\rm -f *.o *.out $(OUT) $(OUT).tar.gz
 
 tar :
-	tar -czvf main.cpp
+	tar -czvf $(OUT).tar.gz $(OUT) assets
+
+pull :
+	scp phildo@phildogames.com:/var/www/html/games/ogam/mazer/$(OUT).tar.gz .
