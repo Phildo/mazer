@@ -3,7 +3,7 @@ OBJS = main.o
 CC = g++
 DEBUG = #-g
 CFLAGS = -Wall -c $(DEBUG)
-LFLAGS = -Wall -lSDL $(DEBUG)
+LFLAGS = -Wall `sdl-config --libs` $(DEBUG)
 
 $(OUT) : $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o $(OUT)
@@ -22,3 +22,9 @@ untar : $(OUT).tar.gz
 
 pull :
 	scp phildo@phildogames.com:/var/www/html/games/ogam/mazer/$(OUT).tar.gz .
+
+run : $(OUT)
+	./$(OUT)
+
+scratch : clean run
+	
