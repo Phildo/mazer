@@ -14,10 +14,16 @@ SDL_Surface *load_image(char *filename)
   SDL_Surface *loadedImage    = NULL;
   SDL_Surface *optimizedImage = NULL;
   loadedImage = IMG_Load(filename);
+
   if(loadedImage != NULL)
   {
-    optimizedImage = SDL_DisplayFormat(loadedImage);
+    optimizedImage = SDL_DisplayFormatAlpha(loadedImage);
     SDL_FreeSurface(loadedImage);
+    if(optimizedImage != NULL)
+    {
+      Uint32 colorkey = SDL_MapRGB(optimizedImage->format,0,0xFF,0xFF);
+      SDL_SetColorKey(optimizedImage, SDL_SRCCOLORKEY, colorkey);
+    }
   }
 
   return optimizedImage;
