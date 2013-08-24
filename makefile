@@ -1,7 +1,7 @@
 OUT = mazer
 OBJS = main.o
 CC = g++
-DEBUG = -g
+DEBUG = #-g
 CFLAGS = -Wall -c $(DEBUG)
 LFLAGS = -Wall -lSDL $(DEBUG)
 
@@ -12,7 +12,7 @@ main.o : main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
 clean :
-	\rm *.o *.out $(OUT)
+	\rm -f *.o *.out $(OUT)
 
 tar :
 	tar -czvf main.cpp
