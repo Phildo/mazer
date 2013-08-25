@@ -1,11 +1,13 @@
-class SDL_Surface;
+struct SDL_Surface;
 
 class Render
 {
   private:
     SDL_Surface *screen;
+    SDL_Surface *face;
   public:
     Render();
-    void render();
+    ~Render();
+    void draw();
 };
 

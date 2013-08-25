@@ -1,17 +1,17 @@
 class Render;
-class EventHandler;
+class InputHandler;
 
 class Game
 {
   private:
     Render *render;
-    EventHandler *eventHandler;
+    InputHandler *inputHandler;
     
     bool quit;
   public:
     Game();
     ~Game();
 
-    void begin();
+    void run();
 };
 
