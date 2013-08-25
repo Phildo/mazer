@@ -1,5 +1,5 @@
 OUT = mazer
-OBJS = main.o game.o render.o inputhandler.o
+OBJS = main.o game.o render.o inputhandler.o timer.o
 CC = g++
 DEBUG = #-g
 CFLAGS = -Wall -c `sdl-config --cflags` $(DEBUG)
@@ -19,6 +19,9 @@ render.o : render.cpp render.h
 
 inputhandler.o : inputhandler.cpp inputhandler.h
 	$(CC) $(CFLAGS) inputhandler.cpp
+
+timer.o : timer.cpp timer.h
+	$(CC) $(CFLAGS) timer.cpp
 
 clean :
 	\rm -rf *.o *.out $(OUT)

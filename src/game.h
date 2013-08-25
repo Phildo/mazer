@@ -1,13 +1,14 @@
 class Render;
 class InputHandler;
+class Timer;
 
 class Game
 {
   private:
     Render *render;
     InputHandler *inputHandler;
-    
-    bool quit;
+    Timer *timer;
+
   public:
     Game();
     ~Game();
