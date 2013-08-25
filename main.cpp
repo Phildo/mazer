@@ -42,12 +42,35 @@ int main(int argc, char **args)
   bool quit = false;
 
   SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF));
-  apply_surface(100,100,hello,screen);
+  //apply_surface(100,100,hello,screen);
   if(SDL_Flip(screen) == -1) return 1;
   
   while(!quit)
   {
-    if(SDL_PollEvent(&event) && event.type == SDL_QUIT) quit = true;
+    while(SDL_PollEvent(&event))
+    {
+      if(event.type == SDL_QUIT) quit = true;
+      else if(event.type == SDL_KEYDOWN)
+      {
+        switch(event.key.keysym.sym)
+        {
+          case SDLK_UP: case SDLK_w:
+            apply_surface(100,100,hello,screen);
+            break;
+          case SDLK_LEFT: case SDLK_a:
+            apply_surface(SCREEN_WIDTH-100-hello->w,100,hello,screen);
+            break;
+          case SDLK_DOWN: case SDLK_s:
+            apply_surface(SCREEN_WIDTH-100-hello->w,SCREEN_HEIGHT-100-hello->h,hello,screen);
+            break;
+          case SDLK_RIGHT: case SDLK_d:
+            apply_surface(100,SCREEN_HEIGHT-100-hello->h,hello,screen);
+            break;
+          default:;
+        }
+        if(SDL_Flip(screen) == -1) return 1;
+      }
+    }
   }
 
   clean_up();
