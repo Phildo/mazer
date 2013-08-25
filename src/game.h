@@ -9,10 +9,13 @@ class Game
     InputHandler *inputHandler;
     Timer *timer;
 
+    void tick();
+
   public:
     Game();
     ~Game();
 
+    void initialize();
     void run();
 };
 
