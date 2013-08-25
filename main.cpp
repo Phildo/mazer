@@ -1,6 +1,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+#include "sdl_help.h"
+
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP = 32; //bits-per-pixel
@@ -8,35 +10,6 @@ const int SCREEN_BPP = 32; //bits-per-pixel
 SDL_Event event;
 SDL_Surface *hello = NULL;
 SDL_Surface *screen = NULL;
-
-SDL_Surface *load_image(char *filename)
-{
-  SDL_Surface *loadedImage    = NULL;
-  SDL_Surface *optimizedImage = NULL;
-  loadedImage = IMG_Load(filename);
-
-  if(loadedImage != NULL)
-  {
-    optimizedImage = SDL_DisplayFormatAlpha(loadedImage);
-    SDL_FreeSurface(loadedImage);
-    if(optimizedImage != NULL)
-    {
-      Uint32 colorkey = SDL_MapRGB(optimizedImage->format,0,0xFF,0xFF);
-      SDL_SetColorKey(optimizedImage, SDL_SRCCOLORKEY, colorkey);
-    }
-  }
-
-  return optimizedImage;
-}
-
-void apply_surface(int x, int y, SDL_Surface *source, SDL_Surface *destination)
-{
-  SDL_Rect offset;
-  offset.x = x;
-  offset.y = y;
-
-  SDL_BlitSurface(source, NULL, destination, &offset);
-}
 
 bool init()
 {
@@ -68,6 +41,7 @@ int main(int argc, char **args)
 
   bool quit = false;
 
+  SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF));
   apply_surface(100,100,hello,screen);
   if(SDL_Flip(screen) == -1) return 1;
   
