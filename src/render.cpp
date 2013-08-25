@@ -52,10 +52,10 @@ void Render::draw(MazeBlock *blocks)
   {
     for(int j = 0; j < y; j++)
     {
-      if(blocks[(j*y)+i].type & OPEN_TOP)    apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_WIDTH/y),top,   screen);
-      if(blocks[(j*y)+i].type & OPEN_RIGHT)  apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_WIDTH/y),right, screen);
-      if(blocks[(j*y)+i].type & OPEN_BOTTOM) apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_WIDTH/y),bottom,screen);
-      if(blocks[(j*y)+i].type & OPEN_LEFT)   apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_WIDTH/y),left,  screen);
+      if(!(blocks[(j*y)+i].type & OPEN_TOP))    apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_HEIGHT/y),top,   screen);
+      if(!(blocks[(j*y)+i].type & OPEN_RIGHT))  apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_HEIGHT/y),right, screen);
+      if(!(blocks[(j*y)+i].type & OPEN_BOTTOM)) apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_HEIGHT/y),bottom,screen);
+      if(!(blocks[(j*y)+i].type & OPEN_LEFT))   apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_HEIGHT/y),left,  screen);
     }
   }
 

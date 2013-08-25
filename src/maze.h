@@ -1,5 +1,6 @@
 enum MazeBlockType
 {
+  OPEN_NONE         = 0,
   OPEN_TOP          = 1,
   OPEN_RIGHT        = 2,
   OPEN_TOP_RIGHT    = 3,  //OPEN_TOP | OPEN_RIGHT
