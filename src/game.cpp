@@ -24,5 +24,7 @@ void Game::run()
 
 Game::~Game()
 {
+  delete render;
+  delete inputHandler;
 }
 
