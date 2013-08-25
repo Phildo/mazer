@@ -1,5 +1,5 @@
 OUT = mazer
-OBJS = main.o sdl_help.o
+OBJS = main.o game.o render.o eventhandler.o
 CC = g++
 DEBUG = #-g
 CFLAGS = -Wall -c `sdl-config --cflags` $(DEBUG)
@@ -8,11 +8,17 @@ LFLAGS = -Wall `sdl-config --libs` -lSDL_image $(DEBUG)
 $(OUT) : $(OBJS)
 	$(CC) $(LFLAGS) $(OBJS) -o $(OUT)
 
-main.o : main.cpp sdl_help.h
+main.o : main.cpp game.h
 	$(CC) $(CFLAGS) main.cpp
 
-sdl_help.o : sdl_help.cpp sdl_help.h
-	$(CC) $(CFLAGS) sdl_help.cpp
+game.o : game.cpp game.h
+	$(CC) $(CFLAGS) game.cpp
+
+render.o : render.cpp render.h
+	$(CC) $(CFLAGS) render.cpp
+
+eventhandler.o : eventhandler.cpp eventhandler.h
+	$(CC) $(CFLAGS) eventhandler.cpp
 
 clean :
 	\rm -f *.o *.out $(OUT)
