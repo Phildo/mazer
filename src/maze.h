@@ -1,17 +1,17 @@
 enum MazeBlockType
 {
-  OPEN_NONE         = 0,
-  OPEN_TOP          = 1,
-  OPEN_RIGHT        = 2,
-  OPEN_TOP_RIGHT    = 3,  //OPEN_TOP | OPEN_RIGHT
-  OPEN_BOTTOM       = 4,
-  OPEN_VERTICAL     = 5,  //OPEN_TOP | OPEN_BOTTOM
-  OPEN_RIGHT_BOTTOM = 6,  //OPEN_RIGHT | OPEN_RIGHT
-  OPEN_LEFT         = 8,
-  OPEN_LEFT_TOP     = 9,  //OPEN_LEFT | OPEN_TOP
-  OPEN_HORIZONTAL   = 10, //OPEN_LEFT | OPEN_RIGHT
-  OPEN_BOTTOM_LEFT  = 12, //OPEN_BOTTOM | OPEN_LEFT
-  OPEN_ALL          = 15  //OPEN_TOP | OPEN_RIGHT | OPEN_BOTTOM | OPEN_LEFT
+  CLOSE_NONE         = 0,
+  CLOSE_TOP          = 1,
+  CLOSE_RIGHT        = 2,
+  CLOSE_TOP_RIGHT    = 3,  //CLOSE_TOP | CLOSE_RIGHT
+  CLOSE_BOTTOM       = 4,
+  CLOSE_VERTICAL     = 5,  //CLOSE_TOP | CLOSE_BOTTOM
+  CLOSE_RIGHT_BOTTOM = 6,  //CLOSE_RIGHT | CLOSE_RIGHT
+  CLOSE_LEFT         = 8,
+  CLOSE_LEFT_TOP     = 9,  //CLOSE_LEFT | CLOSE_TOP
+  CLOSE_HORIZONTAL   = 10, //CLOSE_LEFT | CLOSE_RIGHT
+  CLOSE_BOTTOM_LEFT  = 12, //CLOSE_BOTTOM | CLOSE_LEFT
+  CLOSE_ALL          = 15  //CLOSE_TOP | CLOSE_RIGHT | CLOSE_BOTTOM | CLOSE_LEFT
 };
 
 struct MazeBlock
@@ -25,7 +25,8 @@ class Maze
 {
   private:
     MazeBlock *blocks;
-    void generate(int x, int y);
+    int height;
+    int width;
   public:
     Maze(int x, int y);
     ~Maze();

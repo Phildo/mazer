@@ -44,18 +44,19 @@ Render::Render()
 void Render::draw(MazeBlock *blocks)
 {
   SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF));
-  apply_surface((screen->w-face->w)/2,(screen->h-face->h)/2,face,screen);
+  //apply_surface((screen->w-face->w)/2,(screen->h-face->h)/2,face,screen);
 
-  int x = 40;
-  int y = 30;
-  for(int i = 0; i < x; i++)
+  int width = 40;
+  int height = 30;
+  for(int y = 0; y < height; y++)
   {
-    for(int j = 0; j < y; j++)
+    for(int x = 0; x < width; x++)
     {
-      if(!(blocks[(j*y)+i].type & OPEN_TOP))    apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_HEIGHT/y),top,   screen);
-      if(!(blocks[(j*y)+i].type & OPEN_RIGHT))  apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_HEIGHT/y),right, screen);
-      if(!(blocks[(j*y)+i].type & OPEN_BOTTOM)) apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_HEIGHT/y),bottom,screen);
-      if(!(blocks[(j*y)+i].type & OPEN_LEFT))   apply_surface(i*(SCREEN_WIDTH/x),j*(SCREEN_HEIGHT/y),left,  screen);
+      //if(x == 0 || y == 0 || x == width-1 || y == height-1) apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),face,screen);
+      if(blocks[(y*width)+x].type & CLOSE_TOP)    apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),top,   screen);
+      if(blocks[(y*width)+x].type & CLOSE_RIGHT)  apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),right, screen);
+      if(blocks[(y*width)+x].type & CLOSE_BOTTOM) apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),bottom,screen);
+      if(blocks[(y*width)+x].type & CLOSE_LEFT)   apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),left,  screen);
     }
   }
 
