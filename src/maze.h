@@ -1,24 +1,24 @@
-enum MazeBlockType
+enum MazeBlockWallType
 {
-  CLOSE_NONE         = 0,
-  CLOSE_TOP          = 1,
-  CLOSE_RIGHT        = 2,
-  CLOSE_TOP_RIGHT    = 3,  //CLOSE_TOP | CLOSE_RIGHT
-  CLOSE_BOTTOM       = 4,
-  CLOSE_VERTICAL     = 5,  //CLOSE_TOP | CLOSE_BOTTOM
-  CLOSE_RIGHT_BOTTOM = 6,  //CLOSE_RIGHT | CLOSE_RIGHT
-  CLOSE_LEFT         = 8,
-  CLOSE_LEFT_TOP     = 9,  //CLOSE_LEFT | CLOSE_TOP
-  CLOSE_HORIZONTAL   = 10, //CLOSE_LEFT | CLOSE_RIGHT
-  CLOSE_BOTTOM_LEFT  = 12, //CLOSE_BOTTOM | CLOSE_LEFT
-  CLOSE_ALL          = 15  //CLOSE_TOP | CLOSE_RIGHT | CLOSE_BOTTOM | CLOSE_LEFT
+  WALL_NONE         = 0,
+  WALL_TOP          = 1,
+  WALL_RIGHT        = 2,
+  WALL_TOP_RIGHT    = 3,  //TOP | RIGHT
+  WALL_BOTTOM       = 4,
+  WALL_VERTICAL     = 5,  //TOP | BOTTOM
+  WALL_RIGHT_BOTTOM = 6,  //RIGHT | RIGHT
+  WALL_LEFT         = 8,
+  WALL_LEFT_TOP     = 9,  //LEFT | TOP
+  WALL_HORIZONTAL   = 10, //LEFT | RIGHT
+  WALL_BOTTOM_LEFT  = 12, //BOTTOM | LEFT
+  WALL_ALL          = 15  //TOP | RIGHT | BOTTOM | LEFT
 };
 
 struct MazeBlock
 {
   int x;
   int y;
-  MazeBlockType type;
+  MazeBlockWallType type;
 };
 
 class Maze

@@ -53,10 +53,10 @@ void Render::draw(MazeBlock *blocks)
     for(int x = 0; x < width; x++)
     {
       //if(x == 0 || y == 0 || x == width-1 || y == height-1) apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),face,screen);
-      if(blocks[(y*width)+x].type & CLOSE_TOP)    apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),top,   screen);
-      if(blocks[(y*width)+x].type & CLOSE_RIGHT)  apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),right, screen);
-      if(blocks[(y*width)+x].type & CLOSE_BOTTOM) apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),bottom,screen);
-      if(blocks[(y*width)+x].type & CLOSE_LEFT)   apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),left,  screen);
+      if(blocks[(y*width)+x].type & WALL_TOP)    apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),top,   screen);
+      if(blocks[(y*width)+x].type & WALL_RIGHT)  apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),right, screen);
+      if(blocks[(y*width)+x].type & WALL_BOTTOM) apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),bottom,screen);
+      if(blocks[(y*width)+x].type & WALL_LEFT)   apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),left,  screen);
     }
   }
 
