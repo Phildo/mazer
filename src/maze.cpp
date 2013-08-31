@@ -44,56 +44,44 @@ MazeBlock *generate(int width, int height)
 
   //set default full-maze state
   for(y = 0; y < height; y++)
-  {
     for(x = 0; x < width; x++)
-    {
-      if(y == 0)
-        blocks[(y*width)+x].type = WALL_BOTTOM;
-      else if(y == height-1)
-        blocks[(y*width)+x].type = WALL_TOP;
-      else if(x == 0)
-        blocks[(y*width)+x].type = WALL_RIGHT;
-      else if(x == width-1)
-        blocks[(y*width)+x].type = WALL_LEFT;
-      else
-        blocks[(y*width)+x].type = WALL_ALL;
-    }
-  }
-  //corners...
-  blocks[(0         *width)+        0].type = WALL_NONE;
-  blocks[((height-1)*width)+        0].type = WALL_NONE;
-  blocks[(0         *width)+(width-1)].type = WALL_NONE;
-  blocks[((height-1)*width)+(width-1)].type = WALL_NONE;
+      blocks[(y*width)+x].type = WALL_NONE;
 
-  std::list<MazeBlock> curWalk;
+  for(y = 1; y < height-1; y++)
+    for(x = 1; x < width-1; x++)
+      closeBlockWall(blocks,x,y,width,height,WALL_ALL);
 
   //drunken walk through for a bit
-  x = 20;
-  y = 15;
-  int newx = 20;
-  int newy = 15;
 
+  //std::list<MazeBlock> curWalk;
   MazeBlockWallType dir;
-  for(int i = 0; i < 100000; i++)
+  int newx;
+  int newy;
+  for(int e = 0; e < 15; e++)
   {
-      dir = WALL_NONE;
+    x = (rand()%37)+1;//0-38;
+    y = (rand()%27)+1;//0-28;
+    for(int i = 0; i < 50; i++)
+    {
+      newx = x;
+      newy = y;
       switch(rand()%4)
       {
-        case 0: dir = WALL_BOTTOM; newy = y+1; break;
-        case 1: dir = WALL_LEFT;   newx = x-1; break;
-        case 2: dir = WALL_TOP;    newy = y-1; break;
-        case 3: dir = WALL_RIGHT;  newx = x+1; break;
+        case 0: dir = WALL_BOTTOM; newy = (y+1); break;
+        case 1: dir = WALL_LEFT;   newx = (x-1); break;
+        case 2: dir = WALL_TOP;    newy = (y-1); break;
+        case 3: dir = WALL_RIGHT;  newx = (x+1); break;
       }
 
-      if(blocks[((newy+1)*width)+newx].type == WALL_ALL || blocks[((y+1)*width)+x].type & dir)
+      if(blocks[(newy*width)+newx].type == WALL_ALL || (~(int)(blocks[(y*width)+x].type) & dir))
       {
         openBlockWall(blocks,x,y,width,height,dir);
         x = newx;
         y = newy;
-        curWalk.push_front(blocks[(newy*width)+newx]);
+        //curWalk.push_front(blocks[(newy*width)+newx]);
       }
+    }
   }
-
   return blocks;
 }
 
