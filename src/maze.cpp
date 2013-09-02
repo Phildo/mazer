@@ -1,5 +1,4 @@
 #include "maze.h"
-#include <iostream>
 #include <list>
 
 MazeBlock *generate(int width, int height);

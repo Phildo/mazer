@@ -1,12 +1,14 @@
 #include "game.h"
 
 #include <SDL/SDL.h>
+#include <iostream>
 #include "render.h"
 #include "inputhandler.h"
 #include "timer.h"
 #include "maze.h"
 
-const int MS_PER_TICK = 200;
+const int FPS = 10;
+const int MS_PER_TICK = 1000/FPS;//200;
 
 Game::Game()
 {
@@ -27,18 +29,17 @@ void Game::run()
   SDL_Event event;
 
   timer->stamp();
-  tick();
+  tick(); //only tick once (rather than in the loop) because we're not doing anything...
   while(!SDL_PollEvent(&event) || event.type != SDL_QUIT)
   {
-  /*
     tickSeconds += timer->msSinceStamp();
+    timer->stamp();
 
     while(tickSeconds > MS_PER_TICK)
     {
       tickSeconds -= MS_PER_TICK;
-      //tick();
+      //std::cout << "tick... " << tickSeconds << "\n" << std::flush;
     }
-    */
   }
 }
 

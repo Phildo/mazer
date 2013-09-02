@@ -59,7 +59,6 @@ void Render::draw(MazeBlock *blocks)
       if(blocks[(y*width)+x].type & WALL_LEFT)   apply_surface(x*(SCREEN_WIDTH/width),y*(SCREEN_HEIGHT/height),left,  screen);
     }
   }
-
   SDL_Flip(screen);
 }
 
