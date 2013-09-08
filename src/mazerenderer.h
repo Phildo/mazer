@@ -1,12 +1,8 @@
-struct SDL_Surface;
-struct MazeBlock;
+#include "renderer.h"
 
-class Render
+class MazeRender : class Renderer
 {
   private:
-    SDL_Surface *screen;
-    SDL_Surface *face;
-
     SDL_Surface *top;
     SDL_Surface *right;
     SDL_Surface *bottom;

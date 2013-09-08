@@ -2,20 +2,22 @@
 
 #include <SDL/SDL.h>
 #include <iostream>
-#include "render.h"
+#include "graphics.h"
 #include "inputhandler.h"
 #include "timer.h"
 #include "maze.h"
+#include "mazerenderer.h"
 
 const int FPS = 10;
 const int MS_PER_TICK = 1000/FPS;//200;
 
 Game::Game()
 {
-  render = new Render();
+  graphics = new Graphics();
   inputHandler = new InputHandler();
   timer = new Timer();
   maze = new Maze(40,30);
+  mazerenderer = new MazeRenderer(maze);
 }
 
 void Game::initialize()
@@ -38,21 +40,33 @@ void Game::run()
     while(tickSeconds > MS_PER_TICK)
     {
       tickSeconds -= MS_PER_TICK;
-      //std::cout << "tick... " << tickSeconds << "\n" << std::flush;
+      //std::cout << "tick... " << tickSeconds << std::endl;
     }
   }
 }
 
 void Game::tick()
 {
-  render->draw(maze->getBlocks());
+  tickLogic();
+  tickGraphics();
+}
+
+void Game::tickLogic()
+{
+
+}
+
+void Game::tickGraphics()
+{
+  graphics->render(mazerenderer);
 }
 
 Game::~Game()
 {
-  delete render;
+  delete graphics;
   delete inputHandler;
   delete timer;
   delete maze;
+  delete mazerenderer;
 }
 
