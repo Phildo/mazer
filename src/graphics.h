@@ -8,6 +8,6 @@ class Graphics
     Graphics();
     ~Graphics();
 
-    void render(Renderer &r);
+    void render(Renderer& r);
 };
 

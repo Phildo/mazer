@@ -13,10 +13,10 @@ const int MS_PER_TICK = 1000/FPS;//200;
 
 Game::Game()
 {
-  graphics = new Graphics();
+  graphics     = new Graphics();
   inputHandler = new InputHandler();
-  timer = new Timer();
-  maze = new Maze(40,30);
+  timer        = new Timer();
+  maze         = new Maze(40,30);
   mazerenderer = new MazeRenderer(maze);
 }
 
@@ -58,6 +58,7 @@ void Game::tickLogic()
 
 void Game::tickGraphics()
 {
+  mazerenderer->render(graphics);
   graphics->render(mazerenderer);
 }
 
