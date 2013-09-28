@@ -1,6 +1,6 @@
 #include "renderer.h"
-
-class MazeRender : class Renderer
+class Maze;
+class MazeRenderer : class Renderer
 {
   private:
     SDL_Surface *top;
@@ -8,8 +8,8 @@ class MazeRender : class Renderer
     SDL_Surface *bottom;
     SDL_Surface *left;
   public:
-    Render();
-    ~Render();
-    void draw(MazeBlock *blocks);
+    MazeRenderer();
+    ~MazeRenderer();
+    void render(const Maze& m, const Graphics& g);
 };
 

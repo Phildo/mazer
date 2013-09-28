@@ -17,7 +17,7 @@ Game::Game()
   inputHandler = new InputHandler();
   timer        = new Timer();
   maze         = new Maze(40,30);
-  mazerenderer = new MazeRenderer(maze);
+  mazerenderer = new MazeRenderer();
 }
 
 void Game::initialize()
@@ -58,8 +58,7 @@ void Game::tickLogic()
 
 void Game::tickGraphics()
 {
-  mazerenderer->render(graphics);
-  graphics->render(mazerenderer);
+  mazerenderer->render(maze,graphics);
 }
 
 Game::~Game()

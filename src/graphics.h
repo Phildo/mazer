@@ -7,7 +7,5 @@ class Graphics
   public:
     Graphics();
     ~Graphics();
-
-    void render(Renderer& r);
 };
 

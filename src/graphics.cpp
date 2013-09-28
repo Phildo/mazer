@@ -2,7 +2,6 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include "rendererh.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -19,7 +18,3 @@ Graphics::~Graphics()
   SDL_FreeSurface(screen);
 }
 
-void Graphics::render(Renderer& r)
-{
-  
-}

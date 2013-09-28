@@ -7,11 +7,11 @@ class MazeRenderer;
 class Game
 {
   private:
-    Graphics *graphics;
-    InputHandler *inputHandler;
-    Timer *timer;
-    Maze *maze;
-    MazeRenderer *mazerenderer;
+    Graphics* graphics;
+    InputHandler* inputHandler;
+    Timer* timer;
+    Maze* maze;
+    MazeRenderer* mazerenderer;
 
     void tick();
     void tickLogic();
