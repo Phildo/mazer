@@ -1,3 +1,6 @@
+#ifndef _GAME_H
+#define _GAME_H
+
 class Graphics;
 class InputHandler;
 class Timer;
@@ -24,4 +27,6 @@ class Game
     void initialize();
     void run();
 };
+
+#endif
 

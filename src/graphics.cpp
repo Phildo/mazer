@@ -18,3 +18,7 @@ Graphics::~Graphics()
   SDL_FreeSurface(screen);
 }
 
+Graphics::SDL_Surface* screen()
+{
+  return screen;
+}

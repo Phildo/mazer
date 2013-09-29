@@ -1,3 +1,6 @@
+#ifndef _MAZE_H
+#define _MAZE_H
+
 enum MazeBlockWallType
 {
   WALL_NONE         = 0,
@@ -33,4 +36,6 @@ class Maze
 
     MazeBlock *getBlocks();
 };
+
+#endif
 

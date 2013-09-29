@@ -1,5 +1,9 @@
+#ifndef _RENDERER_H
+#define _RENDERER_H
+
 struct SDL_Surface;
 class Graphics;
+
 class Renderer
 {
   protected:
@@ -9,4 +13,6 @@ class Renderer
   public:
     virtual void render(const Graphics& g) = 0;
 };
+
+#endif
 

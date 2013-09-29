@@ -1,3 +1,6 @@
+#ifndef _MAZERENDERER_H
+#define _MAZERENDERER_H
+
 #include "renderer.h"
 class Maze;
 class MazeRenderer : class Renderer
@@ -12,4 +15,6 @@ class MazeRenderer : class Renderer
     ~MazeRenderer();
     void render(const Maze& m, const Graphics& g);
 };
+
+#endif
 
