@@ -2,7 +2,8 @@
 OUT = mazer
 OBJS = main.o game.o timer.o graphics.o renderer.o inputhandler.o maze.o mazerenderer.o
 CC = g++
-DEBUG = #-g
+DEBUG = -g
+DEBUGGER = gdb
 CFLAGS = -Wall -c `sdl-config --cflags` $(DEBUG)
 LFLAGS = -Wall `sdl-config --libs` -lSDL_image $(DEBUG)
 
@@ -12,7 +13,7 @@ $(OUT) : $(OBJS)
 main.o : main.cpp game.h
 	$(CC) $(CFLAGS) main.cpp
 
-game.o : game.cpp game.h maze.h
+game.o : game.cpp game.h inputhandler.h timer.h maze.h mazerenderer.h
 	$(CC) $(CFLAGS) game.cpp
 
 timer.o : timer.cpp timer.h
@@ -32,6 +33,9 @@ maze.o : maze.cpp maze.h
 
 mazerenderer.o : mazerenderer.cpp mazerenderer.h renderer.h graphics.h maze.h
 	$(CC) $(CFLAGS) mazerenderer.cpp
+
+debug : $(OUT)
+	$(DEBUGGER) $(OUT)
 
 clean :
 	\rm -rf *.o *.out $(OUT)

@@ -14,7 +14,7 @@ Renderer::~Renderer()
   SDL_FreeSurface(sprite);
 }
 
-void Renderer::load_image(const char* filename, SDL_Surface* surface)
+void Renderer::load_image(const char* filename, SDL_Surface*& surface)
 {
   SDL_Surface *loadedImage = NULL;
   loadedImage = IMG_Load(filename);

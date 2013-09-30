@@ -2,7 +2,7 @@
 #define _GAME_H_
 
 class Graphics;
-class InputHandler;
+//class InputHandler;
 class Timer;
 class Maze;
 class MazeRenderer;
@@ -11,7 +11,7 @@ class Game
 {
   private:
     Graphics* graphics;
-    InputHandler* inputHandler;
+    //InputHandler* inputHandler;
     Timer* timer;
     Maze* maze;
     MazeRenderer* mazerenderer;

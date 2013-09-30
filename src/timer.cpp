@@ -11,7 +11,7 @@ void Timer::stamp()
   stampTime = SDL_GetTicks();
 }
 
-int Timer::msSinceStamp()
+int Timer::msSinceStamp() const
 {
   return SDL_GetTicks() - stampTime;
 }

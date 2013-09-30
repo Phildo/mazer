@@ -10,7 +10,7 @@ class Timer
     ~Timer();
     
     void stamp();
-    int msSinceStamp();
+    int msSinceStamp() const;
 };
 
 #endif

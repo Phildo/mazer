@@ -3,7 +3,7 @@
 #include <SDL/SDL.h>
 #include <iostream>
 #include "graphics.h"
-#include "inputhandler.h"
+//#include "inputhandler.h"
 #include "timer.h"
 #include "maze.h"
 #include "mazerenderer.h"
@@ -14,7 +14,7 @@ const int MS_PER_TICK = 1000/FPS;//200;
 Game::Game()
 {
   graphics     = new Graphics();
-  inputHandler = new InputHandler();
+  //inputHandler = new InputHandler();
   timer        = new Timer();
   maze         = new Maze(40,30);
   mazerenderer = new MazeRenderer();
@@ -66,7 +66,7 @@ void Game::tickGraphics()
 Game::~Game()
 {
   delete graphics;
-  delete inputHandler;
+  //delete inputHandler;
   delete timer;
   delete maze;
   delete mazerenderer;

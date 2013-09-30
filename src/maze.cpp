@@ -1,10 +1,10 @@
 #include "maze.h"
 #include <list>
 
-Maze::Maze(int x, int y)
+Maze::Maze(int w, int h)
 {
-  width = x;
-  height = y;
+  width = w;
+  height = h;
   blocks = generate();
 }
 
@@ -13,7 +13,7 @@ Maze::~Maze()
   delete [] blocks;
 }
 
-void Maze::closeBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t)
+void Maze::closeBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t) const
 {
   blocks[(width*y)+x].type = (MazeBlockWallType)(blocks[(width*y)+x].type | t);
 
@@ -23,7 +23,7 @@ void Maze::closeBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t)
   if(t & WALL_LEFT)   blocks[(width* y)   +x-1].type = (MazeBlockWallType)(blocks[(width* y)   +x-1].type | WALL_RIGHT);
 }
 
-void Maze::openBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t)
+void Maze::openBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t) const
 {
   blocks[(width*y)+x].type = (MazeBlockWallType)(blocks[(width*y)+x].type & ~t);
 
@@ -33,7 +33,7 @@ void Maze::openBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t)
   if(t & WALL_LEFT)   blocks[(width* y)   +x-1].type = (MazeBlockWallType)(blocks[(width* y)   +x-1].type & ~WALL_RIGHT);
 }
 
-bool Maze::hasAvailableEdges(MazeBlock *blocks, int x, int y)
+bool Maze::hasAvailableEdges(MazeBlock *blocks, int x, int y) const
 {
     if(blocks[((y+1)*width)+x].type == WALL_ALL) return true;
     if(blocks[((y-1)*width)+x].type == WALL_ALL) return true;
@@ -89,7 +89,9 @@ MazeBlock* Maze::generate()
         case 3: dir = WALL_RIGHT;  newx = (x+1); break;
       }
 
-      if(newx != 0 && newx != width-1 && newy != 0 && newy != height-1 && blocks[(newy*width)+newx].type == WALL_ALL)// || (~(int)(blocks[(y*width)+x].type) & dir))
+      if(newx != 0 && newx != width-1  && 
+         newy != 0 && newy != height-1 && 
+         blocks[(newy*width)+newx].type == WALL_ALL)
       {
         openBlockWall(blocks,x,y,dir);
         if(!hasAvailableEdges(blocks, x, y)) edges.remove(curBlock);
@@ -109,17 +111,17 @@ MazeBlock* Maze::generate()
   return blocks;
 }
 
-int Maze::getHeight()
+int Maze::getHeight() const
 {
   return height;
 }
 
-int Maze::getWidth()
+int Maze::getWidth() const
 {
   return width;
 }
 
-MazeBlock* Maze::getBlocks()
+MazeBlock* Maze::getBlocks() const
 {
   return blocks;
 }

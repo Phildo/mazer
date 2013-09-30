@@ -42,3 +42,4 @@ SDL_Surface* Graphics::getScreen() const
 {
   return screen;
 }
+

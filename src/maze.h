@@ -31,17 +31,17 @@ class Maze
     int height;
     int width;
 
-    void closeBlockWall(   MazeBlock* blocks, int x, int y, MazeBlockWallType t);
-    void openBlockWall(    MazeBlock* blocks, int x, int y, MazeBlockWallType t);
-    bool hasAvailableEdges(MazeBlock* blocks, int x, int y);
+    void closeBlockWall(   MazeBlock* blocks, int x, int y, MazeBlockWallType t) const;
+    void openBlockWall(    MazeBlock* blocks, int x, int y, MazeBlockWallType t) const;
+    bool hasAvailableEdges(MazeBlock* blocks, int x, int y) const;
     MazeBlock *generate();
   public:
-    Maze(int x, int y);
+    Maze(int w, int h);
     ~Maze();
 
-    int getHeight();
-    int getWidth();
-    MazeBlock *getBlocks();
+    int getHeight() const;
+    int getWidth() const;
+    MazeBlock *getBlocks() const;
 };
 
 #endif
