@@ -1,5 +1,5 @@
-#ifndef _MAZE_H
-#define _MAZE_H
+#ifndef _MAZE_H_
+#define _MAZE_H_
 
 enum MazeBlockWallType
 {
@@ -30,10 +30,17 @@ class Maze
     MazeBlock *blocks;
     int height;
     int width;
+
+    void closeBlockWall(   MazeBlock* blocks, int x, int y, MazeBlockWallType t);
+    void openBlockWall(    MazeBlock* blocks, int x, int y, MazeBlockWallType t);
+    bool hasAvailableEdges(MazeBlock* blocks, int x, int y);
+    MazeBlock *generate();
   public:
     Maze(int x, int y);
     ~Maze();
 
+    int getHeight();
+    int getWidth();
     MazeBlock *getBlocks();
 };
 

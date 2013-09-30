@@ -1,9 +1,11 @@
-#ifndef _MAZERENDERER_H
-#define _MAZERENDERER_H
+#ifndef _MAZERENDERER_H_
+#define _MAZERENDERER_H_
 
 #include "renderer.h"
+
 class Maze;
-class MazeRenderer : class Renderer
+
+class MazeRenderer : public Renderer
 {
   private:
     SDL_Surface *top;
@@ -13,7 +15,7 @@ class MazeRenderer : class Renderer
   public:
     MazeRenderer();
     ~MazeRenderer();
-    void render(const Maze& m, const Graphics& g);
+    void render(void* v, const Graphics* g);
 };
 
 #endif

@@ -1,13 +1,11 @@
 #include "maze.h"
 #include <list>
 
-MazeBlock *generate(int width, int height);
-
 Maze::Maze(int x, int y)
 {
   width = x;
   height = y;
-  blocks = generate(width, height);
+  blocks = generate();
 }
 
 Maze::~Maze()
@@ -15,7 +13,7 @@ Maze::~Maze()
   delete [] blocks;
 }
 
-void closeBlockWall(MazeBlock *blocks, int x, int y, int width, int height, MazeBlockWallType t)
+void Maze::closeBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t)
 {
   blocks[(width*y)+x].type = (MazeBlockWallType)(blocks[(width*y)+x].type | t);
 
@@ -25,7 +23,7 @@ void closeBlockWall(MazeBlock *blocks, int x, int y, int width, int height, Maze
   if(t & WALL_LEFT)   blocks[(width* y)   +x-1].type = (MazeBlockWallType)(blocks[(width* y)   +x-1].type | WALL_RIGHT);
 }
 
-void openBlockWall(MazeBlock *blocks, int x, int y, int width, int height, MazeBlockWallType t)
+void Maze::openBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t)
 {
   blocks[(width*y)+x].type = (MazeBlockWallType)(blocks[(width*y)+x].type & ~t);
 
@@ -35,7 +33,7 @@ void openBlockWall(MazeBlock *blocks, int x, int y, int width, int height, MazeB
   if(t & WALL_LEFT)   blocks[(width* y)   +x-1].type = (MazeBlockWallType)(blocks[(width* y)   +x-1].type & ~WALL_RIGHT);
 }
 
-bool hasAvailableEdges(MazeBlock *blocks, int x, int y, int width, int height)
+bool Maze::hasAvailableEdges(MazeBlock *blocks, int x, int y)
 {
     if(blocks[((y+1)*width)+x].type == WALL_ALL) return true;
     if(blocks[((y-1)*width)+x].type == WALL_ALL) return true;
@@ -45,7 +43,7 @@ bool hasAvailableEdges(MazeBlock *blocks, int x, int y, int width, int height)
     return false;
 }
 
-MazeBlock *generate(int width, int height)
+MazeBlock* Maze::generate()
 {
   MazeBlock *blocks = new MazeBlock[width*height];
   MazeBlock *curBlock;
@@ -62,7 +60,7 @@ MazeBlock *generate(int width, int height)
     }
   for(y = 1; y < height-1; y++)
     for(x = 1; x < width-1; x++)
-      closeBlockWall(blocks,x,y,width,height,WALL_ALL);
+      closeBlockWall(blocks,x,y,WALL_ALL);
 
   //drunken walk through for a bit
 
@@ -79,7 +77,7 @@ MazeBlock *generate(int width, int height)
     x = curBlock->x;
     y = curBlock->y;
 
-    while(hasAvailableEdges(blocks, x, y, width, height))
+    while(hasAvailableEdges(blocks, x, y))
     {
       newx = x;
       newy = y;
@@ -93,25 +91,35 @@ MazeBlock *generate(int width, int height)
 
       if(newx != 0 && newx != width-1 && newy != 0 && newy != height-1 && blocks[(newy*width)+newx].type == WALL_ALL)// || (~(int)(blocks[(y*width)+x].type) & dir))
       {
-        openBlockWall(blocks,x,y,width,height,dir);
-        if(!hasAvailableEdges(blocks, x, y, width, height)) edges.remove(curBlock);
+        openBlockWall(blocks,x,y,dir);
+        if(!hasAvailableEdges(blocks, x, y)) edges.remove(curBlock);
         x = newx;
         y = newy;
         curBlock = &blocks[(y*width)+x];
-        if(hasAvailableEdges(blocks, x, y, width, height)) edges.push_back(curBlock);
+        if(hasAvailableEdges(blocks, x, y)) edges.push_back(curBlock);
 
         //expensive...
-        if(!hasAvailableEdges(blocks, x, (y+1), width, height)) edges.remove(&blocks[((y+1)*width)+x]);
-        if(!hasAvailableEdges(blocks, x, (y-1), width, height)) edges.remove(&blocks[((y-1)*width)+x]);
-        if(!hasAvailableEdges(blocks, (x+1), y, width, height)) edges.remove(&blocks[(y*width)+(x+1)]);
-        if(!hasAvailableEdges(blocks, (x-1), y, width, height)) edges.remove(&blocks[(y*width)+(x-1)]);
+        if(!hasAvailableEdges(blocks, x, (y+1))) edges.remove(&blocks[((y+1)*width)+x]);
+        if(!hasAvailableEdges(blocks, x, (y-1))) edges.remove(&blocks[((y-1)*width)+x]);
+        if(!hasAvailableEdges(blocks, (x+1), y)) edges.remove(&blocks[(y*width)+(x+1)]);
+        if(!hasAvailableEdges(blocks, (x-1), y)) edges.remove(&blocks[(y*width)+(x-1)]);
       }
     }
   }
   return blocks;
 }
 
-MazeBlock *Maze::getBlocks()
+int Maze::getHeight()
+{
+  return height;
+}
+
+int Maze::getWidth()
+{
+  return width;
+}
+
+MazeBlock* Maze::getBlocks()
 {
   return blocks;
 }

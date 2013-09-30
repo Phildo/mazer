@@ -1,5 +1,5 @@
-#ifndef _GRAPHICS_H
-#define _GRAPHICS_H
+#ifndef _GRAPHICS_H_
+#define _GRAPHICS_H_
 
 struct SDL_Surface;
 
@@ -11,7 +11,12 @@ class Graphics
     Graphics();
     ~Graphics();
 
-    SDL_Surface* screen();
+    void clear();
+    void flip();
+
+    int getHeight() const;
+    int getWidth() const;
+    SDL_Surface* getScreen() const;
 };
 
 #endif

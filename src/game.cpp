@@ -58,7 +58,9 @@ void Game::tickLogic()
 
 void Game::tickGraphics()
 {
+  graphics->clear();
   mazerenderer->render(maze,graphics);
+  graphics->flip();
 }
 
 Game::~Game()

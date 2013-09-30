@@ -18,7 +18,27 @@ Graphics::~Graphics()
   SDL_FreeSurface(screen);
 }
 
-Graphics::SDL_Surface* screen()
+void Graphics::clear()
+{
+  SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF));
+}
+
+void Graphics::flip()
+{
+  SDL_Flip(screen);
+}
+
+int Graphics::getWidth() const
+{
+  return SCREEN_WIDTH;
+}
+
+int Graphics::getHeight() const
+{
+  return SCREEN_HEIGHT;
+}
+
+SDL_Surface* Graphics::getScreen() const
 {
   return screen;
 }

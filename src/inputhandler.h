@@ -1,5 +1,5 @@
-#ifndef _INPUTHANDLER_H
-#define _INPUTHANDLER_H
+#ifndef _INPUTHANDLER_H_
+#define _INPUTHANDLER_H_
 
 class InputHandler
 {
