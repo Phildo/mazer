@@ -6,9 +6,10 @@ int main(int argc, char **args)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
 
-  Game g;
-  g.initialize();
-  g.run();
+  Game* g = new Game();
+  g->initialize();
+  g->run();
+  delete g;
 
   SDL_Quit();
   return 0;
