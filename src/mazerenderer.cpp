@@ -7,13 +7,13 @@
 
 MazeRenderer::MazeRenderer()
 {
-  load_image("../assets/top.png",    top);
-  load_image("../assets/right.png",  right);
-  load_image("../assets/bottom.png", bottom);
-  load_image("../assets/left.png",   left);
+  RenderUtils::load_image("../assets/top.png",    top);
+  RenderUtils::load_image("../assets/right.png",  right);
+  RenderUtils::load_image("../assets/bottom.png", bottom);
+  RenderUtils::load_image("../assets/left.png",   left);
 }
 
-void MazeRenderer::render(void* v, const Graphics* g)
+void MazeRenderer::render(void* v, const Graphics* g) const
 {
   Maze* m = (Maze*)v;
   int w = m->getWidth();
@@ -27,10 +27,10 @@ void MazeRenderer::render(void* v, const Graphics* g)
   {
     for(int x = 0; x < w; x++)
     {
-      if(blocks[(y*w)+x].type & WALL_TOP)    apply_surface(x*(gw/w),y*(gh/h),top,   screen);
-      if(blocks[(y*w)+x].type & WALL_RIGHT)  apply_surface(x*(gw/w),y*(gh/h),right, screen);
-      if(blocks[(y*w)+x].type & WALL_BOTTOM) apply_surface(x*(gw/w),y*(gh/h),bottom,screen);
-      if(blocks[(y*w)+x].type & WALL_LEFT)   apply_surface(x*(gw/w),y*(gh/h),left,  screen);
+      if(blocks[(y*w)+x].type & WALL_TOP)    RenderUtils::apply_surface(x*(gw/w),y*(gh/h),top,   screen);
+      if(blocks[(y*w)+x].type & WALL_RIGHT)  RenderUtils::apply_surface(x*(gw/w),y*(gh/h),right, screen);
+      if(blocks[(y*w)+x].type & WALL_BOTTOM) RenderUtils::apply_surface(x*(gw/w),y*(gh/h),bottom,screen);
+      if(blocks[(y*w)+x].type & WALL_LEFT)   RenderUtils::apply_surface(x*(gw/w),y*(gh/h),left,  screen);
     }
   }
 }

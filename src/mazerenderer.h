@@ -15,7 +15,7 @@ class MazeRenderer : public Renderer
   public:
     MazeRenderer();
     ~MazeRenderer();
-    void render(void* v, const Graphics* g);
+    void render(void* v, const Graphics* g) const;
 };
 
 #endif
