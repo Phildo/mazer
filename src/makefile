@@ -1,6 +1,6 @@
 
 OUT = mazer
-OBJS = main.o game.o graphics.o timer.o inputhandler.o renderutils.o mainscene.o maze.o mazerenderer.o
+OBJS = main.o game.o graphics.o timer.o inputhandler.o renderutils.o mainscene.o maze.o mazerenderer.o player.o playerrenderer.o
 CC = g++
 DEBUG = -g
 DEBUGGER = gdb
@@ -28,7 +28,7 @@ inputhandler.o : inputhandler.cpp inputhandler.h
 renderutils.o : renderutils.cpp renderutils.h
 	$(CC) $(CFLAGS) renderutils.cpp
 
-mainscene.o : mainscene.cpp mainscene.h scene.h maze.h mazerenderer.h
+mainscene.o : mainscene.cpp mainscene.h scene.h maze.h mazerenderer.h player.h playerrenderer.h
 	$(CC) $(CFLAGS) mainscene.cpp
 
 maze.o : maze.cpp maze.h
@@ -36,6 +36,12 @@ maze.o : maze.cpp maze.h
 
 mazerenderer.o : mazerenderer.cpp mazerenderer.h renderer.h graphics.h maze.h
 	$(CC) $(CFLAGS) mazerenderer.cpp
+
+player.o : player.cpp player.h
+	$(CC) $(CFLAGS) player.cpp
+
+playerrenderer.o : playerrenderer.cpp playerrenderer.h renderer.h graphics.h player.h
+	$(CC) $(CFLAGS) playerrenderer.cpp
 
 debug : $(OUT)
 	$(DEBUGGER) $(OUT)
