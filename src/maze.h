@@ -31,9 +31,9 @@ class Maze
     int height;
     int width;
 
-    void closeBlockWall(   MazeBlock* blocks, int x, int y, MazeBlockWallType t) const;
-    void openBlockWall(    MazeBlock* blocks, int x, int y, MazeBlockWallType t) const;
-    bool hasAvailableEdges(MazeBlock* blocks, int x, int y) const;
+    void closeBlockWall(       MazeBlock* blocks, int x, int y, MazeBlockWallType t) const;
+    void openBlockWall(        MazeBlock* blocks, int x, int y, MazeBlockWallType t) const;
+    bool hasUntouchedNeighbors(MazeBlock* blocks, int x, int y) const;
     MazeBlock *generate();
   public:
     Maze(int w, int h);

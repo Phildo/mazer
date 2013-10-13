@@ -33,7 +33,7 @@ void Maze::openBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t) c
   if(t & WALL_LEFT)   blocks[(width* y)   +x-1].type = (MazeBlockWallType)(blocks[(width* y)   +x-1].type & ~WALL_RIGHT);
 }
 
-bool Maze::hasAvailableEdges(MazeBlock *blocks, int x, int y) const
+bool Maze::hasUntouchedNeighbors(MazeBlock *blocks, int x, int y) const
 {
     if(blocks[((y+1)*width)+x].type == WALL_ALL) return true;
     if(blocks[((y-1)*width)+x].type == WALL_ALL) return true;
@@ -62,8 +62,6 @@ MazeBlock* Maze::generate()
     for(x = 1; x < width-1; x++)
       closeBlockWall(blocks,x,y,WALL_ALL);
 
-  //drunken walk through for a bit
-
   std::list<MazeBlock *> edges;
   std::list<MazeBlock *>::iterator e_it;
   edges.push_back(&blocks[(1*width)+1]);
@@ -77,7 +75,7 @@ MazeBlock* Maze::generate()
     x = curBlock->x;
     y = curBlock->y;
 
-    while(hasAvailableEdges(blocks, x, y))
+    while(hasUntouchedNeighbors(blocks, x, y))
     {
       newx = x;
       newy = y;
@@ -94,17 +92,17 @@ MazeBlock* Maze::generate()
          blocks[(newy*width)+newx].type == WALL_ALL)
       {
         openBlockWall(blocks,x,y,dir);
-        if(!hasAvailableEdges(blocks, x, y)) edges.remove(curBlock);
+        if(!hasUntouchedNeighbors(blocks, x, y)) edges.remove(curBlock);
         x = newx;
         y = newy;
         curBlock = &blocks[(y*width)+x];
-        if(hasAvailableEdges(blocks, x, y)) edges.push_back(curBlock);
+        if(hasUntouchedNeighbors(blocks, x, y)) edges.push_back(curBlock);
 
         //expensive...
-        if(!hasAvailableEdges(blocks, x, (y+1))) edges.remove(&blocks[((y+1)*width)+x]);
-        if(!hasAvailableEdges(blocks, x, (y-1))) edges.remove(&blocks[((y-1)*width)+x]);
-        if(!hasAvailableEdges(blocks, (x+1), y)) edges.remove(&blocks[(y*width)+(x+1)]);
-        if(!hasAvailableEdges(blocks, (x-1), y)) edges.remove(&blocks[(y*width)+(x-1)]);
+        if(!hasUntouchedNeighbors(blocks, x, (y+1))) edges.remove(&blocks[((y+1)*width)+x]);
+        if(!hasUntouchedNeighbors(blocks, x, (y-1))) edges.remove(&blocks[((y-1)*width)+x]);
+        if(!hasUntouchedNeighbors(blocks, (x+1), y)) edges.remove(&blocks[(y*width)+(x+1)]);
+        if(!hasUntouchedNeighbors(blocks, (x-1), y)) edges.remove(&blocks[(y*width)+(x-1)]);
       }
     }
   }

@@ -3,18 +3,18 @@
 #include <SDL/SDL.h>
 #include <iostream>
 #include "graphics.h"
-//#include "inputhandler.h"
+#include "inputhandler.h"
 #include "timer.h"
 #include "scene.h"
 #include "mainscene.h"
 
 const int FPS = 10;
-const int MS_PER_TICK = 1000/FPS;//200;
+const int MS_PER_TICK = 1000/FPS;
 
 Game::Game()
 {
   graphics     = new Graphics();
-  //inputHandler = new InputHandler();
+  inputHandler = new InputHandler();
   timer        = new Timer();
   mainScene    = new MainScene();
 }
@@ -28,9 +28,9 @@ void Game::run()
 {
   int tickSeconds = 0;
   SDL_Event event;
+  Input input;
 
   timer->stamp();
-      tick();
   while(!SDL_PollEvent(&event) || event.type != SDL_QUIT)
   {
     tickSeconds += timer->msSinceStamp();
@@ -39,19 +39,22 @@ void Game::run()
     while(tickSeconds > MS_PER_TICK)
     {
       tickSeconds -= MS_PER_TICK;
+
+      tickInput(event, input);
+      tickLogic(input);
+      tickGraphics();
     }
   }
 }
 
-void Game::tick()
+void Game::tickInput(const SDL_Event& e, Input& i)
 {
-  tickLogic();
-  tickGraphics();
+  inputHandler->takeInput(e, i);
 }
 
-void Game::tickLogic()
+void Game::tickLogic(const Input& i)
 {
-  scene->tick();
+  scene->tick(i);
 }
 
 void Game::tickGraphics()
@@ -64,7 +67,7 @@ void Game::tickGraphics()
 Game::~Game()
 {
   delete graphics;
-  //delete inputHandler;
+  delete inputHandler;
   delete timer;
   delete mainScene;
 }

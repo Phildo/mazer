@@ -14,7 +14,7 @@ void MainScene::render(const Graphics* g) const
   mazeRenderer->render(maze, g);
 }
 
-void MainScene::tick() const
+void MainScene::tick(const Input& i)
 {
 }
 

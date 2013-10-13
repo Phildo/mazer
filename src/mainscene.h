@@ -5,6 +5,7 @@
 
 class Maze;
 class MazeRenderer;
+struct Input;
 
 class MainScene : public Scene
 {
@@ -16,7 +17,7 @@ class MainScene : public Scene
     ~MainScene();
 
     void render(const Graphics* g) const;
-    void tick() const;
+    void tick(const Input& i);
 };
 
 #endif
