@@ -7,7 +7,7 @@ PlayerRenderer::PlayerRenderer()
 
 }
 
-void PlayerRenderer::render(void* r, const Graphics* g) const
+void PlayerRenderer::render(const void* r, const Graphics* g) const
 {
 
 }

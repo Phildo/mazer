@@ -9,7 +9,7 @@ class PlayerRenderer : public Renderer
   public:
     PlayerRenderer();
     ~PlayerRenderer();
-    void render(void* r, const Graphics* g) const;
+    void render(const void* r, const Graphics* g) const;
 };
 
 #endif
