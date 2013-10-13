@@ -8,7 +8,7 @@ class Graphics;
 class Renderer
 {
   public:
-    virtual ~Renderer() = 0;
+    virtual ~Renderer() {};
     virtual void render(void* r, const Graphics* g) const = 0;
 };
 

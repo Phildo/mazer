@@ -5,8 +5,8 @@
 #include "graphics.h"
 //#include "inputhandler.h"
 #include "timer.h"
-#include "maze.h"
-#include "mazerenderer.h"
+#include "scene.h"
+#include "mainscene.h"
 
 const int FPS = 10;
 const int MS_PER_TICK = 1000/FPS;//200;
@@ -16,13 +16,12 @@ Game::Game()
   graphics     = new Graphics();
   //inputHandler = new InputHandler();
   timer        = new Timer();
-  maze         = new Maze(40,30);
-  mazerenderer = new MazeRenderer();
+  mainScene    = new MainScene();
 }
 
 void Game::initialize()
 {
-
+  scene = mainScene;
 }
 
 void Game::run()
@@ -31,7 +30,7 @@ void Game::run()
   SDL_Event event;
 
   timer->stamp();
-  tick(); //only tick once (rather than in the loop) because we're not doing anything...
+      tick();
   while(!SDL_PollEvent(&event) || event.type != SDL_QUIT)
   {
     tickSeconds += timer->msSinceStamp();
@@ -40,7 +39,6 @@ void Game::run()
     while(tickSeconds > MS_PER_TICK)
     {
       tickSeconds -= MS_PER_TICK;
-      //std::cout << "tick... " << tickSeconds << std::endl;
     }
   }
 }
@@ -53,13 +51,13 @@ void Game::tick()
 
 void Game::tickLogic()
 {
-
+  scene->tick();
 }
 
 void Game::tickGraphics()
 {
   graphics->clear();
-  mazerenderer->render(maze,graphics);
+  scene->render(graphics);
   graphics->flip();
 }
 
@@ -68,7 +66,6 @@ Game::~Game()
   delete graphics;
   //delete inputHandler;
   delete timer;
-  delete maze;
-  delete mazerenderer;
+  delete mainScene;
 }
 

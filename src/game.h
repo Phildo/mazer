@@ -4,8 +4,8 @@
 class Graphics;
 //class InputHandler;
 class Timer;
-class Maze;
-class MazeRenderer;
+class Scene;
+class MainScene;
 
 class Game
 {
@@ -13,8 +13,9 @@ class Game
     Graphics* graphics;
     //InputHandler* inputHandler;
     Timer* timer;
-    Maze* maze;
-    MazeRenderer* mazerenderer;
+    Scene* scene;
+
+    MainScene* mainScene;
 
     void tick();
     void tickLogic();
