@@ -11,12 +11,8 @@ struct Input
   bool right;
 };
 
-class InputHandler
+namespace InputHandler
 {
-  private:
-  public:
-    InputHandler();
-    ~InputHandler();
     void takeInput(const SDL_Event& e, Input& i);
 };
 

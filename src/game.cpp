@@ -14,7 +14,6 @@ const int MS_PER_TICK = 1000/FPS;
 Game::Game()
 {
   graphics     = new Graphics();
-  inputHandler = new InputHandler();
   timer        = new Timer();
   mainScene    = new MainScene();
 }
@@ -49,7 +48,7 @@ void Game::run()
 
 void Game::tickInput(const SDL_Event& e, Input& i)
 {
-  inputHandler->takeInput(e, i);
+  InputHandler::takeInput(e, i);
 }
 
 void Game::tickLogic(const Input& i)
@@ -67,7 +66,6 @@ void Game::tickGraphics()
 Game::~Game()
 {
   delete graphics;
-  delete inputHandler;
   delete timer;
   delete mainScene;
 }

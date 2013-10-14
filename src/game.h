@@ -2,7 +2,6 @@
 #define _GAME_H_
 
 class Graphics;
-class InputHandler;
 class Timer;
 class Scene;
 class MainScene;
@@ -14,7 +13,6 @@ class Game
 {
   private:
     Graphics* graphics;
-    InputHandler* inputHandler;
     Timer* timer;
     Scene* scene;
 
