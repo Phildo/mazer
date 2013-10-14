@@ -3,12 +3,12 @@
 #include <SDL/SDL.h>
 #include <iostream>
 #include "graphics.h"
-#include "inputhandler.h"
+#include "inpututils.h"
 #include "timer.h"
 #include "scene.h"
 #include "mainscene.h"
 
-const int FPS = 1;
+const int FPS = 60;
 const int MS_PER_TICK = 1000/FPS;
 
 Game::Game()
@@ -25,30 +25,36 @@ void Game::initialize()
 
 void Game::run()
 {
-  int tickSeconds = 0;
+  int tickMS = 0;
+  bool quit = false;
   SDL_Event event;
   Input input;
 
   timer->stamp();
-  while(!SDL_PollEvent(&event) || event.type != SDL_QUIT)
+  while(!quit)
   {
-    tickSeconds += timer->msSinceStamp();
+    tickMS += timer->msSinceStamp();
     timer->stamp();
 
-    while(tickSeconds > MS_PER_TICK)
+    while(tickMS > MS_PER_TICK && !quit)
     {
-      tickSeconds -= MS_PER_TICK;
-
-      tickInput(event, input);
+      tickMS -= MS_PER_TICK;
+      quit = tickInput(event, input);
       tickLogic(input);
-      tickGraphics();
     }
+    tickGraphics();
   }
 }
 
-void Game::tickInput(const SDL_Event& e, Input& i)
+bool Game::tickInput(SDL_Event& e, Input& i)
 {
-  InputHandler::takeInput(e, i);
+  //InputUtils::clearInput(i);
+  while(SDL_PollEvent(&e))
+  {
+    if(e.type == SDL_QUIT) return true;
+    InputUtils::takeInput(e, i);
+  }
+  return false;
 }
 
 void Game::tickLogic(const Input& i)

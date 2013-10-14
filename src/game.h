@@ -18,7 +18,7 @@ class Game
 
     MainScene* mainScene;
 
-    void tickInput(const SDL_Event& e, Input& i);
+    bool tickInput(SDL_Event& e, Input& i);
     void tickLogic(const Input& i);
     void tickGraphics();
 

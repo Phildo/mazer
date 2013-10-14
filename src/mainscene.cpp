@@ -4,7 +4,7 @@
 #include "player.h"
 #include "mazerenderer.h"
 #include "playerrenderer.h"
-#include "inputhandler.h"
+#include "inpututils.h"
 
 MainScene::MainScene()
 {

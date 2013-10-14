@@ -1,5 +1,5 @@
-#ifndef _INPUTHANDLER_H_
-#define _INPUTHANDLER_H_
+#ifndef _INPUTUTILS_H_
+#define _INPUTUTILS_H_
 
 union SDL_Event;
 
@@ -11,8 +11,9 @@ struct Input
   bool right;
 };
 
-namespace InputHandler
+namespace InputUtils
 {
+    void clearInput(Input& i);
     void takeInput(const SDL_Event& e, Input& i);
 };
 
