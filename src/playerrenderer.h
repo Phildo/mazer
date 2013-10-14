@@ -6,6 +6,7 @@
 class PlayerRenderer : public Renderer
 {
   private:
+    SDL_Surface *smile;
   public:
     PlayerRenderer();
     ~PlayerRenderer();

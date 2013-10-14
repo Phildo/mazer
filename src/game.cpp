@@ -8,7 +8,7 @@
 #include "scene.h"
 #include "mainscene.h"
 
-const int FPS = 10;
+const int FPS = 1;
 const int MS_PER_TICK = 1000/FPS;
 
 Game::Game()

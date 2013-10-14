@@ -13,9 +13,9 @@ MazeRenderer::MazeRenderer()
   RenderUtils::load_image("../assets/left.png",   left);
 }
 
-void MazeRenderer::render(const void* v, const Graphics* g) const
+void MazeRenderer::render(const void* r, const Graphics* g) const
 {
-  Maze* m = (Maze*)v;
+  Maze* m = (Maze*)r;
   int w = m->getWidth();
   int h = m->getHeight();
   int gw = g->getWidth();
