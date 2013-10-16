@@ -13,7 +13,17 @@ Maze::~Maze()
   delete [] blocks;
 }
 
-void Maze::closeBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t) const
+bool Maze::wallOpen(MazeBlock& block, MazeBlockWallType t) const
+{
+  return !(block.type & t);
+}
+
+bool Maze::wallClosed(MazeBlock& block, MazeBlockWallType t) const
+{
+  return (block.type & t);
+}
+
+void Maze::closeBlockWall(MazeBlock* blocks, int x, int y, MazeBlockWallType t) const
 {
   blocks[(width*y)+x].type = (MazeBlockWallType)(blocks[(width*y)+x].type | t);
 
@@ -23,7 +33,7 @@ void Maze::closeBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t) 
   if(t & WALL_LEFT)   blocks[(width* y)   +x-1].type = (MazeBlockWallType)(blocks[(width* y)   +x-1].type | WALL_RIGHT);
 }
 
-void Maze::openBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t) const
+void Maze::openBlockWall(MazeBlock* blocks, int x, int y, MazeBlockWallType t) const
 {
   blocks[(width*y)+x].type = (MazeBlockWallType)(blocks[(width*y)+x].type & ~t);
 
@@ -33,7 +43,7 @@ void Maze::openBlockWall(MazeBlock *blocks, int x, int y, MazeBlockWallType t) c
   if(t & WALL_LEFT)   blocks[(width* y)   +x-1].type = (MazeBlockWallType)(blocks[(width* y)   +x-1].type & ~WALL_RIGHT);
 }
 
-bool Maze::hasUntouchedNeighbors(MazeBlock *blocks, int x, int y) const
+bool Maze::hasUntouchedNeighbors(MazeBlock* blocks, int x, int y) const
 {
     if(blocks[((y+1)*width)+x].type == WALL_ALL) return true;
     if(blocks[((y-1)*width)+x].type == WALL_ALL) return true;
@@ -45,8 +55,8 @@ bool Maze::hasUntouchedNeighbors(MazeBlock *blocks, int x, int y) const
 
 MazeBlock* Maze::generate()
 {
-  MazeBlock *blocks = new MazeBlock[width*height];
-  MazeBlock *curBlock;
+  MazeBlock* blocks = new MazeBlock[width*height];
+  MazeBlock* curBlock;
   int x;
   int y;
 
@@ -62,8 +72,8 @@ MazeBlock* Maze::generate()
     for(x = 1; x < width-1; x++)
       closeBlockWall(blocks,x,y,WALL_ALL);
 
-  std::list<MazeBlock *> edges;
-  std::list<MazeBlock *>::iterator e_it;
+  std::list<MazeBlock*> edges;
+  std::list<MazeBlock*>::iterator e_it;
   edges.push_back(&blocks[(1*width)+1]);
 
   int newx;
@@ -117,6 +127,16 @@ int Maze::getHeight() const
 int Maze::getWidth() const
 {
   return width;
+}
+
+bool Maze::isValidMove(int srcX, int srcY, int destX, int destY) const
+{
+  MazeBlockWallType srcWallCheck = WALL_NONE;
+  if(srcX > destX) srcWallCheck = (MazeBlockWallType)(srcWallCheck | WALL_LEFT);
+  if(srcX < destX) srcWallCheck = (MazeBlockWallType)(srcWallCheck | WALL_RIGHT);
+  if(srcY > destY) srcWallCheck = (MazeBlockWallType)(srcWallCheck | WALL_TOP);
+  if(srcY < destY) srcWallCheck = (MazeBlockWallType)(srcWallCheck | WALL_BOTTOM);
+  return wallOpen(blocks[(width*srcY)+srcX], srcWallCheck);
 }
 
 MazeBlock* Maze::getBlocks() const

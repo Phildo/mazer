@@ -23,7 +23,11 @@ void MainScene::render(const Graphics* g) const
 
 void MainScene::tick(const Input& i)
 {
-  player->move((int)i.up, (int)i.down, (int)i.left, (int)i.right);
+  if(maze->isValidMove(player->getX(),
+                      player->getY(),
+                      player->getX()+((int)i.right-(int)i.left),
+                      player->getY()+((int)i.down -(int)i.up)))
+    player->move((int)i.up, (int)i.down, (int)i.left, (int)i.right);
 }
 
 MainScene::~MainScene()

@@ -31,6 +31,8 @@ class Maze
     int height;
     int width;
 
+    bool wallOpen(  MazeBlock& block, MazeBlockWallType t) const;
+    bool wallClosed(MazeBlock& block, MazeBlockWallType t) const;
     void closeBlockWall(       MazeBlock* blocks, int x, int y, MazeBlockWallType t) const;
     void openBlockWall(        MazeBlock* blocks, int x, int y, MazeBlockWallType t) const;
     bool hasUntouchedNeighbors(MazeBlock* blocks, int x, int y) const;
@@ -41,6 +43,7 @@ class Maze
 
     int getHeight() const;
     int getWidth() const;
+    bool isValidMove(int srcX, int srcY, int destX, int destY) const;
     MazeBlock *getBlocks() const;
 };
 
