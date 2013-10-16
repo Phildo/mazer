@@ -16,6 +16,8 @@ class MainScene : public Scene
     Player* player;
     MazeRenderer* mazeRenderer;
     PlayerRenderer* playerRenderer;
+
+    int ticksSinceLastMove;
   public:
     MainScene();
     ~MainScene();

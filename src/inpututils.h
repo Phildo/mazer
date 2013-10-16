@@ -5,6 +5,8 @@ union SDL_Event;
 
 struct Input
 {
+  bool key;//any
+
   bool up;
   bool down;
   bool left;
