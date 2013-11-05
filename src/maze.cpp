@@ -1,5 +1,6 @@
 #include "maze.h"
 #include <list>
+#include <stdlib.h>
 
 Maze::Maze(int w, int h)
 {

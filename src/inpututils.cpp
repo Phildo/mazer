@@ -22,6 +22,7 @@ void InputUtils::takeInput(const SDL_Event& e, Input& i)
       case SDLK_LEFT:  case SDLK_a: i.left  = true; i.key = true; break;
       case SDLK_DOWN:  case SDLK_s: i.down  = true; i.key = true; break;
       case SDLK_RIGHT: case SDLK_d: i.right = true; i.key = true; break;
+      default: break;
     }
   }
   else if(e.type == SDL_KEYUP)
@@ -32,6 +33,7 @@ void InputUtils::takeInput(const SDL_Event& e, Input& i)
       case SDLK_LEFT:  case SDLK_a: i.left  = false; break;
       case SDLK_DOWN:  case SDLK_s: i.down  = false; break;
       case SDLK_RIGHT: case SDLK_d: i.right = false; break;
+      default: break;
     }
     i.key = i.up || i.left || i.down || i.right;
   }
